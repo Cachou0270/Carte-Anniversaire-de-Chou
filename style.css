@@ -1,0 +1,341 @@
+*{
+margin:0;
+padding:0;
+box-sizing;
+font-family:"Poppins", Arial, sans-serif;
+}
+
+body{
+height:100vh;
+overflow;
+background:
+radial-gradient(circle at top,#ffffff,#dff7e8,#0c3b25);
+display;
+justify-content;
+align-items;
+color:#ffffff;
+}
+
+/* Etoiles */
+
+.stars{
+position;
+width:100%;
+height:100%;
+background-image:
+radial-gradient(#ffffff 2px, transparent 2px);
+background-size:60px 60px;
+opacity:.25;
+animation 20s linear infinite;
+}
+
+@keyframes moveStars{
+from{
+transform(0);
+}
+to{
+transform(60px);
+}
+}
+
+
+
+
+/* Sections */
+
+section{
+position;
+z-index:2;
+text-align;
+}
+
+.hidden{
+display;
+}
+
+
+
+
+/* Accueil */
+
+#welcome h2{
+margin-top:40px;
+font-size:32px;
+}
+
+#welcome p{
+margin-top:15px;
+opacity:.8;
+}
+
+
+
+
+/* Enveloppe */
+
+.envelope{
+
+width:260px;
+height:170px;
+
+background:white;
+
+border-radius:15px;
+
+position:relative;
+
+margin:auto;
+
+cursor:pointer;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.35);
+
+animation:float 3s infinite;
+
+}
+
+.envelope{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+border-left:130px solid transparent;
+border-right:130px solid transparent;
+border-top:90px solid #e8fff0;
+
+}
+
+.seal{
+
+position:absolute;
+
+top:65px;
+left:105px;
+
+background:#0b6b3a;
+
+width:50px;
+height:50px;
+
+border-radius:50%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:25px;
+
+z-index:2;
+
+}
+
+
+
+
+/* Lettre */
+
+.letter{
+
+width:90vw;
+max-width:750px;
+
+padding:45px;
+
+background:
+rgba(255,255,255,.18);
+
+backdrop-filter:blur(15px);
+
+border-radius:30px;
+
+box-shadow:
+0 0 50px rgba(0,0,0,.3);
+
+}
+
+
+
+
+h1{
+
+font-size:42px;
+
+color:white;
+
+}
+
+h2{
+
+color:#c8ffdc;
+
+margin:20px;
+
+}
+
+.typing{
+
+font-size:20px;
+
+line-height:1.7;
+
+}
+
+
+
+
+/* Photos */
+
+.photos{
+
+margin:30px;
+
+padding:25px;
+
+border:2px dashed white;
+
+border-radius:20px;
+
+opacity:.8;
+
+}
+
+
+
+
+/* Boutons */
+
+button{
+
+border:none;
+
+padding:15px 35px;
+
+border-radius:50px;
+
+background:white;
+
+color:#086032;
+
+font-size:20px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button{
+
+transform:scale(1.1);
+
+}
+
+
+
+
+/* Cadeau */
+
+.gift-box{
+
+font-size:120px;
+
+cursor:pointer;
+
+animation:bounce 1.5s infinite;
+
+}
+
+
+
+
+@keyframes bounce{
+
+50%{
+transform(-20px);
+}
+
+}
+
+
+
+
+/* Final */
+
+#final{
+
+padding:40px;
+
+}
+
+#final h1{
+
+font-size:35px;
+
+}
+
+#final p{
+
+margin-top:30px;
+
+font-size:24px;
+
+line-height:1.8;
+
+}
+
+strong{
+
+color:#d7ffe5;
+
+}
+
+
+
+
+/* Coeurs */
+
+.heart{
+
+position:absolute;
+
+animation:heartMove linear infinite;
+
+}
+
+@keyframes heartMove{
+
+from{
+transform(100vh);
+}
+
+to{
+transform(-20vh);
+}
+
+}
+
+
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+h1{
+font-size:30px;
+}
+
+.letter{
+padding:25px;
+}
+
+.typing{
+font-size:16px;
+}
+
+}
