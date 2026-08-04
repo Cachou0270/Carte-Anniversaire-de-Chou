@@ -30,7 +30,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* FOND PLUS FONCÉ ET SANS PETITS POINTS DORÉS */
+    /* FOND SANS PETITS POINTS DORÉS */
     body {
       font-family: 'Cormorant Garamond', serif;
       background: radial-gradient(circle at center, #0a4033 0%, #05261e 70%, #021410 100%);
@@ -162,7 +162,7 @@
     }
 
     .title {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: var(--emerald-main);
       margin-bottom: 12px;
       font-weight: 700;
@@ -247,7 +247,6 @@
       width: 180px;
     }
 
-    /* FLAMMES D'ORIGINE */
     .candle-flame {
       position: absolute;
       width: 12px;
@@ -283,6 +282,86 @@
       margin-top: 8px;
     }
 
+    /* INTERACTION PAQUET CADEAU (Étape 3) */
+    .gift-box-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 25px auto;
+      cursor: pointer;
+    }
+
+    .gift-box-wrapper:active {
+      transform: scale(0.96);
+    }
+
+    .gift-lid {
+      position: absolute;
+      top: 15px; left: 10px;
+      width: 120px; height: 35px;
+      background: var(--emerald-main);
+      border-radius: 6px;
+      border: 1.5px solid var(--gold-accent);
+      z-index: 3;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Ruban du couvercle */
+    .gift-lid::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 24px; height: 100%;
+      background: var(--gold-gradient);
+    }
+
+    /* Nœud */
+    .gift-bow {
+      position: absolute;
+      top: -18px; left: 50%;
+      transform: translateX(-50%);
+      width: 45px; height: 20px;
+    }
+    .gift-bow::before, .gift-bow::after {
+      content: '';
+      position: absolute;
+      width: 22px; height: 18px;
+      border: 3px solid #d4af37;
+      border-radius: 50% 50% 0 50%;
+      background: #bf953f;
+    }
+    .gift-bow::before { left: 0; transform: rotate(15deg); }
+    .gift-bow::after { right: 0; transform: rotate(-15deg) scaleX(-1); }
+
+    .gift-body {
+      position: absolute;
+      bottom: 10px; left: 18px;
+      width: 104px; height: 85px;
+      background: var(--emerald-dark);
+      border-radius: 0 0 6px 6px;
+      border: 1.5px solid var(--gold-accent);
+      z-index: 1;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Ruban du corps */
+    .gift-body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 24px; height: 100%;
+      background: var(--gold-gradient);
+    }
+
+    /* Animation ouverture du cadeau */
+    .gift-box-wrapper.opened .gift-lid {
+      transform: translateY(-60px) rotate(-18deg);
+      opacity: 0;
+    }
+
     /* BON CADEAU */
     .gift-ticket {
       background: linear-gradient(135deg, #ffffff 0%, #f4faf7 100%);
@@ -291,9 +370,15 @@
       padding: 25px 18px;
       margin: 20px 0;
       box-shadow: 0 8px 20px rgba(11, 79, 63, 0.05);
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
+      animation: openTicket 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes openTicket {
+      0% { opacity: 0; transform: scale(0.5) translateY(40px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .gift-ticket h2 {
@@ -406,7 +491,7 @@
       height: 280px;
       border-radius: 20px;
       overflow: hidden;
-      margin: 20px 0;
+      margin: 20px 0 0 0;
       border: 2px solid var(--gold-accent);
       box-shadow: 0 12px 30px rgba(11, 79, 63, 0.15);
       position: relative;
@@ -459,7 +544,7 @@
           </svg>
         </div>
       </div>
-      <div class="envelope-text">Pour Chou</div>
+      <div class="envelope-text">Pour toi</div>
       <small style="color: var(--emerald-light); font-size: 0.8rem; margin-top: 10px; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">(Touche pour ouvrir)</small>
     </div>
 
@@ -469,7 +554,7 @@
       <!-- ÉTAPE 1 : PHOTOS & MESSAGE -->
       <div class="step-page active" id="step-1">
         <h1 class="title">
-          Joyeux anniversaire chou
+          Joyeux anniversaire Ryan
           <svg width="26" height="26" viewBox="0 0 24 24" fill="#ff4757"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         </h1>
         
@@ -493,7 +578,7 @@
         </p>
 
         <button class="btn-action" onclick="goToStep(2)">
-          Découvrir le gâteau ➔
+          Découvre ton cadeau ➔
         </button>
       </div>
 
@@ -568,12 +653,21 @@
         </button>
       </div>
 
-      <!-- ÉTAPE 3 : BON CADEAU -->
+      <!-- ÉTAPE 3 : PAQUET CADEAU INTERACTIF -->
       <div class="step-page" id="step-3">
         <h1 class="title">Ton Cadeau</h1>
-        <p class="message">Une surprise spéciale créée rien que pour toi...</p>
+        <p class="message" id="gift-instruction-text">Touche le paquet pour l'ouvrir ! 🎁</p>
 
-        <div class="gift-ticket">
+        <!-- PAQUET CADEAU À CLIQUER -->
+        <div class="gift-box-wrapper" id="gift-box" onclick="openGiftBox()">
+          <div class="gift-lid">
+            <div class="gift-bow"></div>
+          </div>
+          <div class="gift-body"></div>
+        </div>
+
+        <!-- BILLET MASQUÉ AU DÉPART -->
+        <div class="gift-ticket" id="gift-ticket-content">
           <svg width="45" height="45" viewBox="0 0 24 24" fill="#d4af37">
             <path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-9 7.5h-2v-2h2v2zm0-4.5h-2v-2h2v2zm0-4.5h-2v-2h2v2z"/>
           </svg>
@@ -581,7 +675,9 @@
           <p>Bon pour un gros câlin et pleins de bisous 🫂💋</p>
         </div>
 
-        <button class="btn-action" onclick="goToStep(4)">Voir la suite ➔</button>
+        <button class="btn-action" id="btn-to-step4" onclick="goToStep(4)" style="opacity: 0.5; pointer-events: none;">
+          Ouvre ton cadeau d'abord...
+        </button>
       </div>
 
       <!-- ÉTAPE 4 : MESSAGE À GRATTER -->
@@ -620,7 +716,7 @@
           </div>
 
           <div class="letter-paper" id="final-letter-paper">
-            <p>Mon cher Chou,</p>
+            <p>Mon cher Ryan,</p>
             <br>
             <p>Je voulais prendre ce petit moment pour te dire à quel point tu comptes pour moi. Chaque jour à tes côtés est un vrai bonheur.</p>
             <br>
@@ -635,7 +731,7 @@
         <button class="btn-action" onclick="goToStep(6)">Bisouuuss de ta boloss preferer 💋✨</button>
       </div>
 
-      <!-- ÉTAPE 6 : NOUVELLE PAGE PHOTO ET BALONS CŒURS -->
+      <!-- ÉTAPE 6 : PAGE PHOTO FINALE ET BALLONS (Bouton supprimé) -->
       <div class="step-page" id="step-6">
         <h1 class="title">Pour Toujours ❤️</h1>
         <p class="message">Je t'aime de tout mon cœur !</p>
@@ -643,8 +739,6 @@
         <div class="final-photo-container">
           <img src="https://via.placeholder.com/400x400/0b4f3f/ffffff?text=Votre+Plus+Belle+Photo+Ensemble" alt="Photo Souvenir">
         </div>
-
-        <button class="btn-action" onclick="spawnHeartBalloons()">Encore des ballons ! 🎈✨</button>
       </div>
 
     </div>
@@ -653,6 +747,7 @@
 
   <script>
     let candleBlown = false;
+    let giftOpened = false;
     let currentSlide = 0;
 
     // CONFETTIS QUI JAILLISSENT SUR LES CÔTÉS DÈS L'OUVERTURE DU LIEN
@@ -662,14 +757,12 @@
 
     function launchSideConfetti() {
       if (typeof confetti === 'function') {
-        // Canon Gauche
         confetti({
           particleCount: 50,
           angle: 60,
           spread: 55,
           origin: { x: 0, y: 0.7 }
         });
-        // Canon Droit
         confetti({
           particleCount: 50,
           angle: 120,
@@ -684,7 +777,7 @@
       if (stepNumber === 1) {
         document.getElementById('step-0').style.display = 'none';
         document.getElementById('main-card').style.display = 'block';
-        launchSideConfetti(); // Une petite salve pour célébrer l'ouverture !
+        launchSideConfetti();
       }
 
       document.querySelectorAll('.step-page').forEach(page => page.classList.remove('active'));
@@ -716,9 +809,37 @@
         candleBlown = true;
         
         const nextBtn = document.getElementById('btn-to-step3');
-        nextBtn.innerText = "Voir ton cadeau ➔";
+        nextBtn.innerText = "Découvrir la suite ➔";
         nextBtn.style.opacity = "1";
         nextBtn.style.pointerEvents = "auto";
+      }
+    }
+
+    // OUVERTURE DU PAQUET CADEAU ET REVELATION DU BILLET
+    function openGiftBox() {
+      if (!giftOpened) {
+        giftOpened = true;
+        
+        document.getElementById('gift-box').classList.add('opened');
+        document.getElementById('gift-instruction-text').innerText = "Une surprise spéciale rien que pour toi ! ✨";
+        
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 70,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        }
+
+        setTimeout(() => {
+          document.getElementById('gift-box').style.display = 'none';
+          document.getElementById('gift-ticket-content').style.display = 'flex';
+          
+          const nextBtn = document.getElementById('btn-to-step4');
+          nextBtn.innerText = "Voir la suite ➔";
+          nextBtn.style.opacity = "1";
+          nextBtn.style.pointerEvents = "auto";
+        }, 500);
       }
     }
 
