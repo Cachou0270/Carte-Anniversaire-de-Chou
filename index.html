@@ -30,7 +30,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* FOND SANS PETITS POINTS DORÉS */
     body {
       font-family: 'Cormorant Garamond', serif;
       background: radial-gradient(circle at center, #0a4033 0%, #05261e 70%, #021410 100%);
@@ -52,7 +51,6 @@
       overflow: hidden;
     }
 
-    /* BALLONS CŒURS */
     .real-heart-balloon {
       position: absolute;
       bottom: -160px;
@@ -78,7 +76,6 @@
       margin: auto;
     }
 
-    /* CARTE ET ÉTAPES */
     .card {
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
@@ -100,7 +97,6 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* CACHET DE CIRE LUXE 3D */
     .envelope-wrapper {
       width: 100%;
       height: 260px;
@@ -182,7 +178,6 @@
       font-style: italic;
     }
 
-    /* SLIDER PHOTO */
     .photo-slider {
       position: relative;
       width: 100%;
@@ -238,7 +233,6 @@
     .slider-btn.prev { left: 10px; }
     .slider-btn.next { right: 10px; }
 
-    /* GÂTEAU CHOCOLAT & BOUGIES 26 */
     .cake-container-choco {
       margin: 15px 0 20px 0;
       position: relative;
@@ -282,7 +276,6 @@
       margin-top: 8px;
     }
 
-    /* INTERACTION PAQUET CADEAU (Étape 3) */
     .gift-box-wrapper {
       position: relative;
       width: 140px;
@@ -291,9 +284,7 @@
       cursor: pointer;
     }
 
-    .gift-box-wrapper:active {
-      transform: scale(0.96);
-    }
+    .gift-box-wrapper:active { transform: scale(0.96); }
 
     .gift-lid {
       position: absolute;
@@ -307,7 +298,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    /* Ruban du couvercle */
     .gift-lid::before {
       content: '';
       position: absolute;
@@ -317,7 +307,6 @@
       background: var(--gold-gradient);
     }
 
-    /* Nœud */
     .gift-bow {
       position: absolute;
       top: -18px; left: 50%;
@@ -346,7 +335,6 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
 
-    /* Ruban du corps */
     .gift-body::before {
       content: '';
       position: absolute;
@@ -356,13 +344,11 @@
       background: var(--gold-gradient);
     }
 
-    /* Animation ouverture du cadeau */
     .gift-box-wrapper.opened .gift-lid {
       transform: translateY(-60px) rotate(-18deg);
       opacity: 0;
     }
 
-    /* BON CADEAU */
     .gift-ticket {
       background: linear-gradient(135deg, #ffffff 0%, #f4faf7 100%);
       border: 1.5px dashed var(--gold-accent);
@@ -396,7 +382,6 @@
       font-family: 'Cormorant Garamond', serif;
     }
 
-    /* CARTE À GRATTER */
     .scratch-card-wrapper {
       position: relative;
       width: 100%; height: 125px;
@@ -430,7 +415,6 @@
       border-radius: 16px;
     }
 
-    /* LETTRE INTERACTIVE DE FIN */
     .final-envelope-box {
       position: relative;
       width: 100%;
@@ -485,7 +469,6 @@
       color: var(--emerald-main);
     }
 
-    /* PAGE FINALE PHOTO (Étape 6) */
     .final-photo-container {
       width: 100%;
       height: 280px;
@@ -503,7 +486,6 @@
       object-fit: cover;
     }
 
-    /* BOUTONS NAVIGATION LUXE */
     .btn-action {
       background: var(--emerald-main);
       color: #ffffff;
@@ -578,7 +560,7 @@
         </p>
 
         <button class="btn-action" onclick="goToStep(2)">
-          Découvre ton cadeau ➔
+          VITEEEE SOUFFLES TES BOUGIES ➔
         </button>
       </div>
 
@@ -658,7 +640,6 @@
         <h1 class="title">Ton Cadeau</h1>
         <p class="message" id="gift-instruction-text">Touche le paquet pour l'ouvrir ! 🎁</p>
 
-        <!-- PAQUET CADEAU À CLIQUER -->
         <div class="gift-box-wrapper" id="gift-box" onclick="openGiftBox()">
           <div class="gift-lid">
             <div class="gift-bow"></div>
@@ -666,7 +647,6 @@
           <div class="gift-body"></div>
         </div>
 
-        <!-- BILLET MASQUÉ AU DÉPART -->
         <div class="gift-ticket" id="gift-ticket-content">
           <svg width="45" height="45" viewBox="0 0 24 24" fill="#d4af37">
             <path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-9 7.5h-2v-2h2v2zm0-4.5h-2v-2h2v2zm0-4.5h-2v-2h2v2z"/>
@@ -728,10 +708,13 @@
 
         </div>
 
-        <button class="btn-action" onclick="goToStep(6)">Bisouuuss de ta boloss preferer 💋✨</button>
+        <!-- BOUTON VERROUILLÉ D'ABORD -->
+        <button class="btn-action" id="btn-to-step6" onclick="goToStep(6)" style="opacity: 0.5; pointer-events: none;">
+          Ouvre ta lettre d'abord...
+        </button>
       </div>
 
-      <!-- ÉTAPE 6 : PAGE PHOTO FINALE ET BALLONS (Bouton supprimé) -->
+      <!-- ÉTAPE 6 : PAGE PHOTO FINALE ET BALLONS -->
       <div class="step-page" id="step-6">
         <h1 class="title">Pour Toujours ❤️</h1>
         <p class="message">Je t'aime de tout mon cœur !</p>
@@ -748,9 +731,9 @@
   <script>
     let candleBlown = false;
     let giftOpened = false;
+    let letterOpened = false;
     let currentSlide = 0;
 
-    // CONFETTIS QUI JAILLISSENT SUR LES CÔTÉS DÈS L'OUVERTURE DU LIEN
     window.addEventListener('load', () => {
       launchSideConfetti();
     });
@@ -772,7 +755,6 @@
       }
     }
 
-    // CHANGEMENT DE PAGE
     function goToStep(stepNumber) {
       if (stepNumber === 1) {
         document.getElementById('step-0').style.display = 'none';
@@ -793,13 +775,11 @@
       }
     }
 
-    // SLIDER PHOTO
     function moveSlide(direction) {
       currentSlide = (currentSlide + direction + 2) % 2;
       document.getElementById('slider-track').style.transform = `translateX(-${currentSlide * 50}%)`;
     }
 
-    // SOUFFLER LA BOUGIE 26
     function blowOutCandle() {
       if (!candleBlown) {
         document.getElementById('flame-left').classList.add('off');
@@ -809,13 +789,12 @@
         candleBlown = true;
         
         const nextBtn = document.getElementById('btn-to-step3');
-        nextBtn.innerText = "Découvrir la suite ➔";
+        nextBtn.innerText = "VITEEE REGARDE LA SUITE ➔";
         nextBtn.style.opacity = "1";
         nextBtn.style.pointerEvents = "auto";
       }
     }
 
-    // OUVERTURE DU PAQUET CADEAU ET REVELATION DU BILLET
     function openGiftBox() {
       if (!giftOpened) {
         giftOpened = true;
@@ -836,20 +815,27 @@
           document.getElementById('gift-ticket-content').style.display = 'flex';
           
           const nextBtn = document.getElementById('btn-to-step4');
-          nextBtn.innerText = "Voir la suite ➔";
+          nextBtn.innerText = "VITEEE REGARDE LA SUITE ➔";
           nextBtn.style.opacity = "1";
           nextBtn.style.pointerEvents = "auto";
         }, 500);
       }
     }
 
-    // OUVRIR LA LETTRE
+    // OUVRIR LA LETTRE ET DÉVERROUILLER LE BOUTON FINAL
     function openFinalLetter() {
-      document.getElementById('final-closed-envelope').style.display = 'none';
-      document.getElementById('final-letter-paper').style.display = 'block';
+      if (!letterOpened) {
+        letterOpened = true;
+        document.getElementById('final-closed-envelope').style.display = 'none';
+        document.getElementById('final-letter-paper').style.display = 'block';
+        
+        const nextBtn = document.getElementById('btn-to-step6');
+        nextBtn.innerText = "Bisouuuss de ta boloss preferer 💋✨";
+        nextBtn.style.opacity = "1";
+        nextBtn.style.pointerEvents = "auto";
+      }
     }
 
-    // BALONS CŒURS DE L'ÉTAPE 6
     function spawnHeartBalloons() {
       const container = document.getElementById('balloon-container');
       
@@ -908,7 +894,6 @@
       }
     }
 
-    // CARTE À GRATTER
     function initScratchCard() {
       const canvas = document.getElementById('scratch-canvas');
       if (!canvas) return;
@@ -952,3 +937,4 @@
 
 </body>
 </html>
+  
