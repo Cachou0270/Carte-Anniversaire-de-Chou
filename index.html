@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Joyeux Anniversaire Ryan ❤️</title>
+  <title>Joyeux Anniversaire Chou ❤️</title>
 
-  <!-- Importation de la police luxueuse Cormorant Garamond -->
+  <!-- Polices Google Font luxueuses -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -17,7 +17,7 @@
       --emerald-light: #2a8a72;
       --emerald-soft: #e8f5f1;
       --gold-accent: #d4af37;
-      --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+      --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
     }
 
     * {
@@ -30,7 +30,6 @@
 
     body {
       font-family: 'Cormorant Garamond', serif;
-      /* Dégradé Vert Émeraude Clair vers Blanc */
       background: radial-gradient(circle at center, #ffffff 0%, #e8f5f1 50%, #ccebe2 100%);
       min-height: 100vh;
       display: flex;
@@ -42,7 +41,6 @@
       position: relative;
     }
 
-    /* Arrière-plan scintillant doré très doux */
     .sparkles-bg {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -62,50 +60,26 @@
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 10;
+      z-index: 99;
       overflow: hidden;
     }
 
-    /* BALLONS CŒURS CSS (Forme et fil) */
-    .heart-balloon {
+    /* VÉRITABLES BALLONS CŒURS ULTRA RÉALISTES */
+    .real-heart-balloon {
       position: absolute;
-      bottom: -80px;
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-      transform: rotate(-45deg);
-      border-radius: 50% 50% 0 0;
-      box-shadow: inset -3px -3px 8px rgba(0,0,0,0.15), 0 8px 15px rgba(255,117,140,0.3);
-      animation: floatUp 4.5s ease-in forwards;
+      bottom: -100px;
+      width: 55px;
+      height: 75px;
+      animation: floatUpReal 4.5s ease-in forwards;
       cursor: pointer;
       pointer-events: auto;
+      filter: drop-shadow(0 10px 15px rgba(255, 105, 135, 0.35));
     }
 
-    .heart-balloon::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 50%;
-      width: 40px; height: 40px;
-      background: inherit;
-      border-radius: 50%;
-      transform: translateX(-50%);
-    }
-
-    /* Fil du ballon */
-    .heart-balloon::after {
-      content: "";
-      position: absolute;
-      bottom: -12px;
-      left: 18px;
-      width: 2px;
-      height: 16px;
-      background: rgba(255, 126, 179, 0.6);
-      transform: rotate(45deg);
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(-45deg) scale(0.8); opacity: 1; }
-      100% { transform: translateY(-120vh) rotate(-35deg) scale(1.1); opacity: 0; }
+    @keyframes floatUpReal {
+      0% { transform: translateY(0) rotate(-5deg) scale(0.8); opacity: 0.95; }
+      50% { transform: translateY(-60vh) rotate(5deg) scale(1.05); }
+      100% { transform: translateY(-120vh) rotate(-5deg) scale(1.1); opacity: 0; }
     }
 
     .container {
@@ -118,8 +92,8 @@
 
     /* CARTE ET ÉTAPES */
     .card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
       color: var(--emerald-dark);
       width: 100%;
       border-radius: 28px;
@@ -138,11 +112,11 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* ENVELOPPE (Étape 0) */
+    /* CACHET DE CIRE LUXE 3D */
     .envelope-wrapper {
       width: 100%;
-      height: 250px;
-      background: rgba(255, 255, 255, 0.85);
+      height: 260px;
+      background: rgba(255, 255, 255, 0.9);
       border: 1.5px solid var(--gold-accent);
       backdrop-filter: blur(10px);
       border-radius: 24px;
@@ -157,20 +131,37 @@
 
     .envelope-wrapper:active { transform: scale(0.97); }
 
-    .wax-seal {
-      width: 75px; height: 75px;
+    .wax-seal-luxury {
+      width: 80px;
+      height: 80px;
       background: var(--gold-gradient);
       border-radius: 50%;
-      display: flex; justify-content: center; align-items: center;
-      font-size: 30px;
-      box-shadow: 0 6px 18px rgba(191, 149, 63, 0.4);
-      margin-bottom: 15px;
-      animation: pulse 2s infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+        0 8px 20px rgba(180, 130, 30, 0.4);
+      border: 3px solid #aa771c;
+      margin-bottom: 18px;
+      position: relative;
+      animation: sealPulse 2s infinite ease-in-out;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 16px rgba(212, 175, 55, 0); }
+    .wax-seal-inner {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(120, 80, 10, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes sealPulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+      70% { transform: scale(1.04); box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
       100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
     }
 
@@ -183,18 +174,15 @@
     }
 
     .title {
-      font-size: 2.1rem;
+      font-size: 2rem;
       color: var(--emerald-main);
       margin-bottom: 12px;
       font-weight: 700;
       letter-spacing: 0.5px;
-    }
-
-    .heart-icon { color: #ff4757; display: inline-block; animation: beat 1.2s infinite; }
-
-    @keyframes beat {
-      0%, 50%, 100% { transform: scale(1); }
-      25%, 75% { transform: scale(1.2); }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .message {
@@ -262,24 +250,33 @@
     .slider-btn.prev { left: 10px; }
     .slider-btn.next { right: 10px; }
 
-    /* GÂTEAU (Étape 2) */
-    .cake-container { margin: 25px 0; position: relative; display: inline-block; cursor: pointer; }
-    .cake { font-size: 85px; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.1)); }
-    
-    .flame {
+    /* GÂTEAU AVEC ICÔNE ET BOUGIE ANIMÉE */
+    .cake-wrapper {
+      margin: 20px 0;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .flame-svg {
       position: absolute;
-      top: -14px; left: 50%;
+      top: 15px;
+      left: 50%;
       transform: translateX(-50%);
-      font-size: 30px;
-      animation: flicker 0.5s infinite alternate;
+      width: 20px;
+      height: 30px;
+      animation: flameFlicker 0.6s infinite alternate;
       transition: all 0.4s ease;
     }
 
-    .flame.off { opacity: 0; transform: translateX(-50%) translateY(-15px) scale(0); }
+    .flame-svg.off {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px) scale(0);
+    }
 
-    @keyframes flicker {
-      0% { transform: translateX(-50%) scale(1); }
-      100% { transform: translateX(-50%) scale(1.2) rotate(3deg); }
+    @keyframes flameFlicker {
+      0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+      100% { transform: translateX(-50%) scale(1.15) rotate(3deg); }
     }
 
     .instruction {
@@ -292,31 +289,35 @@
       margin-top: 8px;
     }
 
-    /* BON CADEAU (Étape 3) */
+    /* BON CADEAU */
     .gift-ticket {
       background: linear-gradient(135deg, #ffffff 0%, #f4faf7 100%);
       border: 1.5px dashed var(--gold-accent);
       border-radius: 20px;
-      padding: 30px 18px;
+      padding: 25px 18px;
       margin: 20px 0;
       box-shadow: 0 8px 20px rgba(11, 79, 63, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .gift-ticket h2 {
       color: var(--emerald-main);
-      font-size: 1.5rem;
-      margin-bottom: 12px;
+      font-size: 1.4rem;
+      margin-top: 10px;
+      margin-bottom: 8px;
       letter-spacing: 1px;
     }
     
     .gift-ticket p {
       color: #2d3748;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
       font-family: 'Cormorant Garamond', serif;
     }
 
-    /* CARTE À GRATTER (Étape 4) */
+    /* CARTE À GRATTER */
     .scratch-card-wrapper {
       position: relative;
       width: 100%; height: 125px;
@@ -350,13 +351,68 @@
       border-radius: 16px;
     }
 
+    /* LETTRE INTERACTIVE DE FIN */
+    .final-envelope-box {
+      position: relative;
+      width: 100%;
+      min-height: 200px;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .closed-letter-btn {
+      background: #ffffff;
+      border: 1.5px solid var(--gold-accent);
+      border-radius: 20px;
+      padding: 25px 20px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(11, 79, 63, 0.08);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .closed-letter-btn:active { transform: scale(0.97); }
+
+    .letter-paper {
+      display: none;
+      background: #fffdf9;
+      border: 1px solid var(--gold-accent);
+      border-radius: 16px;
+      padding: 25px 20px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      text-align: left;
+      font-family: 'Caveat', cursive;
+      font-size: 1.45rem;
+      line-height: 1.5;
+      color: #2b2b2b;
+      animation: openLetter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes openLetter {
+      0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .letter-signature {
+      margin-top: 15px;
+      text-align: right;
+      font-weight: bold;
+      color: var(--emerald-main);
+    }
+
     /* BOUTONS NAVIGATION LUXE */
     .btn-action {
       background: var(--emerald-main);
       color: #ffffff;
       border: 1px solid var(--gold-accent);
       padding: 16px 24px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       font-family: 'Montserrat', sans-serif;
       text-transform: uppercase;
@@ -367,6 +423,10 @@
       width: 100%;
       box-shadow: 0 8px 18px rgba(11, 79, 63, 0.2);
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     .btn-action:active { transform: scale(0.97); background: var(--emerald-dark); }
@@ -379,9 +439,15 @@
 
   <div class="container">
     
-    <!-- ÉTAPE 0 : ENVELOPPE -->
+    <!-- ÉTAPE 0 : ENVELOPPE AVEC CACHET DE CIRE LUXE -->
     <div class="envelope-wrapper" id="step-0" onclick="goToStep(1)">
-      <div class="wax-seal">✉️</div>
+      <div class="wax-seal-luxury">
+        <div class="wax-seal-inner">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="#6d4c0f">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+      </div>
       <div class="envelope-text">Pour Chou</div>
       <small style="color: var(--emerald-light); font-size: 0.8rem; margin-top: 10px; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">(Touche pour ouvrir)</small>
     </div>
@@ -391,7 +457,10 @@
       
       <!-- ÉTAPE 1 : PHOTOS & MESSAGE -->
       <div class="step-page active" id="step-1">
-        <h1 class="title">Joyeux anniversaire chou <span class="heart-icon">❤️</span></h1>
+        <h1 class="title">
+          Joyeux anniversaire chou
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#ff4757"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </h1>
         
         <div class="photo-slider">
           <button class="slider-btn prev" onclick="moveSlide(-1)">❮</button>
@@ -412,41 +481,58 @@
           Tu as tellement grandi mais tu gardes toujours ce même merveilleux sourire. Merci d'être la personne formidable que tu es chaque jour ! ✨
         </p>
 
-        <button class="btn-action" onclick="goToStep(2)">Découvrir le gâteau 🎂 ➔</button>
+        <button class="btn-action" onclick="goToStep(2)">
+          Découvrir le gâteau ➔
+        </button>
       </div>
 
-      <!-- ÉTAPE 2 : GÂTEAU & BOUGIE -->
+      <!-- ÉTAPE 2 : GÂTEAU & BOUGIE ANIMÉE -->
       <div class="step-page" id="step-2">
-        <h1 class="title">Fais un vœu ! 🕯️</h1>
+        <h1 class="title">Fais un vœu !</h1>
         <p class="message">Touche la bougie pour la souffler et envoyer ton vœu vers les étoiles.</p>
 
-        <div class="cake-container" onclick="blowOutCandle()">
-          <div class="flame" id="flame">🔥</div>
-          <div class="cake">🎂</div>
+        <div class="cake-wrapper" onclick="blowOutCandle()">
+          <!-- Flamme SVG interactive -->
+          <svg class="flame-svg" id="flame" viewBox="0 0 24 24">
+            <path fill="#ff9f43" d="M12 2S7 7 7 12a5 5 0 0 0 10 0c0-5-5-10-5-10z"/>
+            <path fill="#ffdd59" d="M12 6s-3 3-3 6a3 3 0 0 0 6 0c0-3-3-6-3-6z"/>
+          </svg>
+          <!-- Gâteau de luxe SVG -->
+          <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
+            <path d="M32 18v8" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+            <rect x="14" y="26" width="36" height="12" rx="3" fill="#0b4f3f"/>
+            <rect x="10" y="38" width="44" height="16" rx="4" fill="#073b2e"/>
+            <path d="M14 32h36" stroke="#d4af37" stroke-width="2"/>
+            <path d="M10 46h44" stroke="#d4af37" stroke-width="2"/>
+          </svg>
           <div class="instruction" id="cake-hint">Touche le gâteau ✨</div>
         </div>
 
         <button class="btn-action" id="btn-to-step3" onclick="goToStep(3)" style="opacity: 0.5; pointer-events: none;">
-          Éteins la bougie d'abord... 🕯️
+          Éteins la bougie d'abord...
         </button>
       </div>
 
       <!-- ÉTAPE 3 : BON CADEAU -->
       <div class="step-page" id="step-3">
-        <h1 class="title">Ton Cadeau 🎟️</h1>
+        <h1 class="title">Ton Cadeau</h1>
         <p class="message">Une surprise spéciale créée rien que pour toi...</p>
 
         <div class="gift-ticket">
+          <!-- Icône Ticket Doré -->
+          <svg width="45" height="45" viewBox="0 0 24 24" fill="#d4af37">
+            <path d="M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-9 7.5h-2v-2h2v2zm0-4.5h-2v-2h2v2zm0-4.5h-2v-2h2v2z"/>
+          </svg>
           <h2>Billet Spécial Anniversaire</h2>
           <p>Bon pour un gros câlin et pleins de bisous 🫂💋</p>
         </div>
 
-        <button class="btn-action" onclick="goToStep(4)">Voir la dernière surprise 🎁 ➔</button>
+        <button class="btn-action" onclick="goToStep(4)">Voir la suite ➔</button>
       </div>
 
       <!-- ÉTAPE 4 : MESSAGE À GRATTER -->
       <div class="step-page" id="step-4">
-        <h1 class="title">Un dernier mot doux... 💌</h1>
+        <h1 class="title">Un petit mot...</h1>
         <p class="message" style="margin-bottom: 10px;">Gratte la surface ci-dessous avec ton doigt :</p>
 
         <div class="scratch-card-wrapper">
@@ -456,7 +542,43 @@
           <canvas id="scratch-canvas"></canvas>
         </div>
 
-        <button class="btn-action" onclick="spawnHeartBalloons()">Lancer des ballons cœurs 🎈✨</button>
+        <button class="btn-action" onclick="goToStep(5)">Dernière surprise ➔</button>
+      </div>
+
+      <!-- ÉTAPE 5 : LA LETTRE ENVELOPPÉE -->
+      <div class="step-page" id="step-5">
+        <h1 class="title">Une dernière lettre...</h1>
+        <p class="message">Il reste une dernière attention scellée pour toi.</p>
+
+        <div class="final-envelope-box">
+          
+          <div class="closed-letter-btn" id="final-closed-envelope" onclick="openFinalLetter()">
+            <div class="wax-seal-luxury" style="width: 65px; height: 65px; margin-bottom: 10px;">
+              <div class="wax-seal-inner" style="width: 50px; height: 50px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#6d4c0f">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </div>
+            </div>
+            <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--emerald-main);">
+              Ouvrir ta lettre
+            </span>
+          </div>
+
+          <div class="letter-paper" id="final-letter-paper">
+            <p>Mon cher Chou,</p>
+            <br>
+            <p>Je voulais prendre ce petit moment pour te dire à quel point tu comptes pour moi. Chaque jour à tes côtés est un vrai bonheur.</p>
+            <br>
+            <p>Que cette nouvelle année t'apporte autant de joie, de rires et de beaux moments que tu m'en donnes au quotidien.</p>
+            <br>
+            <p>Passe la plus merveilleuse des journées d'anniversaire ! ✨</p>
+            <div class="letter-signature">Avec tout mon amour ❤️</div>
+          </div>
+
+        </div>
+
+        <button class="btn-action" onclick="spawnHeartBalloons()">Envol de cœurs 🎈✨</button>
       </div>
 
     </div>
@@ -500,7 +622,7 @@
         candleBlown = true;
         
         const nextBtn = document.getElementById('btn-to-step3');
-        nextBtn.innerText = "Voir ton cadeau 🎁 ➔";
+        nextBtn.innerText = "Voir ton cadeau ➔";
         nextBtn.style.opacity = "1";
         nextBtn.style.pointerEvents = "auto";
 
@@ -508,27 +630,56 @@
       }
     }
 
-    // ENVOL DE BALLONS CŒURS CSS 3D
+    // OUVRIR LA LETTRE (Étape 5)
+    function openFinalLetter() {
+      document.getElementById('final-closed-envelope').style.display = 'none';
+      document.getElementById('final-letter-paper').style.display = 'block';
+      spawnHeartBalloons();
+    }
+
+    // GENERATEUR DE BALLONS CŒURS ULTRA RÉALISTES (SVG VECTEUR)
     function spawnHeartBalloons() {
       const container = document.getElementById('balloon-container');
+      const colors = ['#ff4d6d', '#ff758f', '#ff8fa3', '#c9184a', '#ffb3c1'];
 
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 14; i++) {
         setTimeout(() => {
           const balloon = document.createElement('div');
-          balloon.className = 'heart-balloon';
+          balloon.className = 'real-heart-balloon';
           
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          
+          // Structure SVG d'un ballon cœur avec ficelle et éclat de lumière
+          balloon.innerHTML = `
+            <svg width="100%" height="100%" viewBox="0 0 100 130">
+              <defs>
+                <linearGradient id="grad-${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+                  <stop offset="30%" style="stop-color:${randomColor};stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#800f2f;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <!-- Ficelle -->
+              <path d="M50 82 Q45 100 52 125" stroke="rgba(200,200,200,0.7)" stroke-width="1.5" fill="none"/>
+              <!-- Corps du ballon -->
+              <path d="M50 80 C20 80 0 55 0 32 C0 14 14 0 32 0 C42 0 48 6 50 11 C52 6 58 0 68 0 C86 0 100 14 100 32 C100 55 80 80 50 80 Z" fill="url(#grad-${i})"/>
+              <!-- Petit nœud attache -->
+              <polygon points="46,80 54,80 50,85" fill="${randomColor}"/>
+              <!-- Reflet lumineux brillant -->
+              <ellipse cx="28" cy="20" rx="8" ry="12" fill="#ffffff" opacity="0.35" transform="rotate(-30 28 20)"/>
+            </svg>
+          `;
+
           balloon.style.left = (Math.random() * 85 + 5) + 'vw';
           
-          // Variations légères de tailles et durées
-          const scale = Math.random() * 0.4 + 0.8;
-          balloon.style.transform = `rotate(-45deg) scale(${scale})`;
+          const scale = Math.random() * 0.4 + 0.75;
+          balloon.style.transform = `scale(${scale})`;
           
-          const duration = Math.random() * 2 + 3.5;
+          const duration = Math.random() * 2 + 3.8;
           balloon.style.animationDuration = duration + 's';
 
-          // Éclater le ballon au toucher
           balloon.onclick = function() {
-            this.style.transform = 'rotate(-45deg) scale(1.6)';
+            this.style.transform = 'scale(1.4)';
             this.style.opacity = '0';
             this.style.transition = 'all 0.2s ease-out';
           };
@@ -551,7 +702,6 @@
       canvas.width = wrapper.offsetWidth;
       canvas.height = wrapper.offsetHeight;
 
-      // Couche à gratter dorée/argentée
       ctx.fillStyle = '#d4af37';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
