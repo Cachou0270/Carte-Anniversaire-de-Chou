@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Joyeux Anniversaire Chou ❤️</title>
+  <title>Joyeux Anniversaire Ryan ❤️</title>
 
   <!-- Polices Google Font luxueuses -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
+  <!-- Script pour les confettis -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     :root {
-      --emerald-dark: #073b2e;
+      --emerald-dark: #04251d;
       --emerald-main: #0b4f3f;
       --emerald-light: #2a8a72;
-      --emerald-soft: #e8f5f1;
       --gold-accent: #d4af37;
       --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
     }
@@ -28,32 +30,18 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    /* FOND PLUS FONCÉ ET SANS PETITS POINTS DORÉS */
     body {
       font-family: 'Cormorant Garamond', serif;
-      background: radial-gradient(circle at center, #ffffff 0%, #e8f5f1 50%, #ccebe2 100%);
+      background: radial-gradient(circle at center, #0a4033 0%, #05261e 70%, #021410 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
       overflow-x: hidden;
-      color: var(--emerald-dark);
+      color: #ffffff;
       position: relative;
-    }
-
-    .sparkles-bg {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      background-image: radial-gradient(rgba(212, 175, 55, 0.25) 1.5px, transparent 0);
-      background-size: 30px 30px;
-      animation: sparkle 4s infinite linear;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.9; }
     }
 
     #balloon-container {
@@ -64,7 +52,7 @@
       overflow: hidden;
     }
 
-    /* BALLONS CŒURS DU STYLE DE LA PHOTO */
+    /* BALLONS CŒURS */
     .real-heart-balloon {
       position: absolute;
       bottom: -160px;
@@ -73,7 +61,7 @@
       animation: floatUpReal 5s ease-in forwards;
       cursor: pointer;
       pointer-events: auto;
-      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
     }
 
     @keyframes floatUpReal {
@@ -92,15 +80,15 @@
 
     /* CARTE ET ÉTAPES */
     .card {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
       color: var(--emerald-dark);
       width: 100%;
       border-radius: 28px;
       padding: 35px 22px;
-      box-shadow: 0 20px 40px rgba(11, 79, 63, 0.08), 0 1px 3px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(212, 175, 55, 0.4);
       text-align: center;
-      border: 1.5px solid rgba(212, 175, 55, 0.5);
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
       animation: fadeInLux 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
@@ -116,11 +104,11 @@
     .envelope-wrapper {
       width: 100%;
       height: 260px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border: 1.5px solid var(--gold-accent);
       backdrop-filter: blur(10px);
       border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(11, 79, 63, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -259,23 +247,30 @@
       width: 180px;
     }
 
-    .flames-group {
+    /* FLAMMES D'ORIGINE */
+    .candle-flame {
+      position: absolute;
+      width: 12px;
+      height: 22px;
+      background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffeb3b 40%, #ff9800 70%, rgba(255,87,34,0) 100%);
+      border-radius: 50% 50% 35% 35%;
+      top: 15px;
+      box-shadow: 0 0 12px #ffeb3b, 0 0 20px #ff9800;
+      animation: flicker 0.6s infinite alternate ease-in-out;
       transition: all 0.4s ease;
     }
 
-    .flames-group.off {
+    .candle-flame.flame-left { left: 68px; }
+    .candle-flame.flame-right { left: 100px; }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-3deg); opacity: 0.95; }
+      100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+    }
+
+    .candle-flame.off {
       opacity: 0;
       transform: translateY(-15px) scale(0);
-    }
-
-    .flame-anim {
-      animation: flameFlicker 0.5s infinite alternate ease-in-out;
-      transform-origin: center bottom;
-    }
-
-    @keyframes flameFlicker {
-      0% { transform: scale(1) rotate(-2deg); }
-      100% { transform: scale(1.15) rotate(3deg); }
     }
 
     .instruction {
@@ -405,6 +400,24 @@
       color: var(--emerald-main);
     }
 
+    /* PAGE FINALE PHOTO (Étape 6) */
+    .final-photo-container {
+      width: 100%;
+      height: 280px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 20px 0;
+      border: 2px solid var(--gold-accent);
+      box-shadow: 0 12px 30px rgba(11, 79, 63, 0.15);
+      position: relative;
+    }
+
+    .final-photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     /* BOUTONS NAVIGATION LUXE */
     .btn-action {
       background: var(--emerald-main);
@@ -420,7 +433,7 @@
       cursor: pointer;
       margin-top: 15px;
       width: 100%;
-      box-shadow: 0 8px 18px rgba(11, 79, 63, 0.2);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
@@ -433,7 +446,6 @@
 </head>
 <body>
 
-  <div class="sparkles-bg"></div>
   <div id="balloon-container"></div>
 
   <div class="container">
@@ -491,6 +503,9 @@
         <p class="message">Touche le gâteau pour souffler tes 26 bougies et envoyer ton vœu vers les étoiles.</p>
 
         <div class="cake-container-choco" onclick="blowOutCandle()">
+          <div class="candle-flame flame-left" id="flame-left"></div>
+          <div class="candle-flame flame-right" id="flame-right"></div>
+
           <svg width="180" height="190" viewBox="0 0 200 210">
             <defs>
               <linearGradient id="chocoDark" x1="0" y1="0" x2="0" y2="1">
@@ -509,59 +524,40 @@
                 <stop offset="50%" stop-color="#fcf6ba"/>
                 <stop offset="100%" stop-color="#aa771c"/>
               </linearGradient>
-
-              <radialGradient id="flameGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="30%" stop-color="#ffdd59"/>
-                <stop offset="80%" stop-color="#ff4757"/>
-                <stop offset="100%" stop-color="#ff4757" stop-opacity="0"/>
-              </radialGradient>
             </defs>
 
-            <!-- Support / Plat de présentation -->
+            <!-- Support / Plat -->
             <ellipse cx="100" cy="188" rx="85" ry="12" fill="#d4af37" opacity="0.4"/>
             <ellipse cx="100" cy="186" rx="80" ry="10" fill="#ffffff"/>
             <ellipse cx="100" cy="186" rx="76" ry="8" fill="#e8f5f1"/>
 
-            <!-- Étage Bas du Gâteau au Chocolat -->
+            <!-- Étage Bas -->
             <path d="M30,135 L30,175 C30,185 170,185 170,175 L170,135 Z" fill="url(#chocoDark)"/>
             <ellipse cx="100" cy="135" rx="70" ry="12" fill="url(#chocoGlaze)"/>
 
-            <!-- Glaçage coulant étage bas -->
+            <!-- Glaçage bas -->
             <path d="M30,135 C30,145 40,155 45,150 C50,145 55,160 65,160 C75,160 80,145 90,152 C100,158 110,162 120,150 C130,140 140,158 150,155 C160,152 170,142 170,135 C170,130 30,130 30,135 Z" fill="#2d1107"/>
 
-            <!-- Étage Haut du Gâteau -->
+            <!-- Étage Haut -->
             <path d="M48,95 L48,130 C48,138 152,138 152,130 L152,95 Z" fill="url(#chocoDark)"/>
             <ellipse cx="100" cy="95" rx="52" ry="9" fill="url(#chocoGlaze)"/>
 
-            <!-- Glaçage coulant étage haut -->
+            <!-- Glaçage haut -->
             <path d="M48,95 C48,105 58,112 65,108 C72,104 78,115 88,115 C98,115 105,105 115,110 C125,115 135,108 142,112 C148,106 152,100 152,95 Z" fill="#2d1107"/>
 
-            <!-- Décorations Chocolat / Crème Fouettée dessus -->
+            <!-- Décorations -->
             <circle cx="65" cy="93" r="5" fill="#5a2a18"/>
             <circle cx="82" cy="95" r="6" fill="#3b170b"/>
             <circle cx="100" cy="96" r="5" fill="#5a2a18"/>
             <circle cx="118" cy="95" r="6" fill="#3b170b"/>
             <circle cx="135" cy="93" r="5" fill="#5a2a18"/>
 
-            <!-- BOUGIES "2" et "6" EN OR -->
+            <!-- BOUGIES "2" et "6" -->
             <text x="73" y="80" font-family="'Montserrat', sans-serif" font-weight="bold" font-size="34" fill="url(#goldCandle)" text-anchor="middle">2</text>
-            <line x1="73" y1="48" x2="73" y2="42" stroke="#333" stroke-width="2"/>
+            <line x1="73" y1="48" x2="73" y2="38" stroke="#333" stroke-width="2"/>
 
             <text x="127" y="80" font-family="'Montserrat', sans-serif" font-weight="bold" font-size="34" fill="url(#goldCandle)" text-anchor="middle">6</text>
-            <line x1="127" y1="48" x2="127" y2="42" stroke="#333" stroke-width="2"/>
-
-            <!-- FLAMMES DES BOUGIES -->
-            <g class="flames-group" id="flames-group">
-              <g class="flame-anim">
-                <ellipse cx="73" cy="33" rx="7" ry="12" fill="url(#flameGlow)"/>
-                <ellipse cx="73" cy="34" rx="3" ry="6" fill="#ffffff"/>
-              </g>
-              <g class="flame-anim" style="animation-delay: 0.2s;">
-                <ellipse cx="127" cy="33" rx="7" ry="12" fill="url(#flameGlow)"/>
-                <ellipse cx="127" cy="34" rx="3" ry="6" fill="#ffffff"/>
-              </g>
-            </g>
+            <line x1="127" y1="48" x2="127" y2="38" stroke="#333" stroke-width="2"/>
           </svg>
 
           <div class="instruction" id="cake-hint">Touche le gâteau ✨</div>
@@ -636,8 +632,19 @@
 
         </div>
 
-        <!-- BOUTON DE FIN PERSONNALISÉ QUI DÉCLENCHE LES BALLONS -->
-        <button class="btn-action" onclick="spawnHeartBalloons()">Bisouuuss de ta boloss preferer 💋✨</button>
+        <button class="btn-action" onclick="goToStep(6)">Bisouuuss de ta boloss preferer 💋✨</button>
+      </div>
+
+      <!-- ÉTAPE 6 : NOUVELLE PAGE PHOTO ET BALONS CŒURS -->
+      <div class="step-page" id="step-6">
+        <h1 class="title">Pour Toujours ❤️</h1>
+        <p class="message">Je t'aime de tout mon cœur !</p>
+
+        <div class="final-photo-container">
+          <img src="https://via.placeholder.com/400x400/0b4f3f/ffffff?text=Votre+Plus+Belle+Photo+Ensemble" alt="Photo Souvenir">
+        </div>
+
+        <button class="btn-action" onclick="spawnHeartBalloons()">Encore des ballons ! 🎈✨</button>
       </div>
 
     </div>
@@ -648,11 +655,36 @@
     let candleBlown = false;
     let currentSlide = 0;
 
-    // CHANGEMENT DE PAGE (Sans animation automatique de ballons)
+    // CONFETTIS QUI JAILLISSENT SUR LES CÔTÉS DÈS L'OUVERTURE DU LIEN
+    window.addEventListener('load', () => {
+      launchSideConfetti();
+    });
+
+    function launchSideConfetti() {
+      if (typeof confetti === 'function') {
+        // Canon Gauche
+        confetti({
+          particleCount: 50,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.7 }
+        });
+        // Canon Droit
+        confetti({
+          particleCount: 50,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.7 }
+        });
+      }
+    }
+
+    // CHANGEMENT DE PAGE
     function goToStep(stepNumber) {
       if (stepNumber === 1) {
         document.getElementById('step-0').style.display = 'none';
         document.getElementById('main-card').style.display = 'block';
+        launchSideConfetti(); // Une petite salve pour célébrer l'ouverture !
       }
 
       document.querySelectorAll('.step-page').forEach(page => page.classList.remove('active'));
@@ -661,6 +693,10 @@
 
       if (stepNumber === 4) {
         setTimeout(initScratchCard, 100);
+      }
+
+      if (stepNumber === 6) {
+        spawnHeartBalloons();
       }
     }
 
@@ -673,7 +709,8 @@
     // SOUFFLER LA BOUGIE 26
     function blowOutCandle() {
       if (!candleBlown) {
-        document.getElementById('flames-group').classList.add('off');
+        document.getElementById('flame-left').classList.add('off');
+        document.getElementById('flame-right').classList.add('off');
         document.getElementById('cake-hint').innerText = "Vœu des 26 ans envoyé ! 💫";
         document.getElementById('cake-hint').style.color = "#0b4f3f";
         candleBlown = true;
@@ -685,27 +722,26 @@
       }
     }
 
-    // OUVRIR LA LETTRE (Étape 5)
+    // OUVRIR LA LETTRE
     function openFinalLetter() {
       document.getElementById('final-closed-envelope').style.display = 'none';
       document.getElementById('final-letter-paper').style.display = 'block';
     }
 
-    // GÉNÉRATEUR DE BALLONS CŒURS ASSORTIS À LA PHOTO (Rouge, Or, Rose, Vert, Violet, Bleu)
+    // BALONS CŒURS DE L'ÉTAPE 6
     function spawnHeartBalloons() {
       const container = document.getElementById('balloon-container');
       
-      // Palettes de couleurs inspirées des ballons de l'image
       const balloonThemes = [
-        { main: '#e60023', highlight: '#ff7382', dark: '#800014' }, // Rouge
-        { main: '#e69900', highlight: '#ffe066', dark: '#805500' }, // Or / Jaune
-        { main: '#e600a1', highlight: '#ff73e1', dark: '#800059' }, // Rose Fuchsia
-        { main: '#2bd900', highlight: '#8aff73', dark: '#187800' }, // Vert
-        { main: '#8a00e6', highlight: '#cf73ff', dark: '#4d0080' }, // Violet
-        { main: '#0088e6', highlight: '#73ccff', dark: '#004c80' }  // Bleu
+        { main: '#e60023', highlight: '#ff7382', dark: '#800014' },
+        { main: '#e69900', highlight: '#ffe066', dark: '#805500' },
+        { main: '#e600a1', highlight: '#ff73e1', dark: '#800059' },
+        { main: '#2bd900', highlight: '#8aff73', dark: '#187800' },
+        { main: '#8a00e6', highlight: '#cf73ff', dark: '#4d0080' },
+        { main: '#0088e6', highlight: '#73ccff', dark: '#004c80' }
       ];
 
-      for (let i = 0; i < 18; i++) {
+      for (let i = 0; i < 22; i++) {
         setTimeout(() => {
           const balloon = document.createElement('div');
           balloon.className = 'real-heart-balloon';
@@ -722,17 +758,9 @@
                   <stop offset="100%" stop-color="${theme.dark}" />
                 </radialGradient>
               </defs>
-              
-              <!-- Ficelle ondulée comme sur la photo -->
               <path d="M50 82 Q42 98 52 110 T48 135 T53 155" stroke="#cccccc" stroke-width="2" fill="none" opacity="0.85"/>
-              
-              <!-- Nœud du ballon -->
               <polygon points="46,80 54,80 50,85" fill="${theme.dark}"/>
-              
-              <!-- Forme du Ballon Cœur -->
               <path d="M50 80 C20 80 0 55 0 32 C0 14 14 0 32 0 C42 0 48 6 50 11 C52 6 58 0 68 0 C86 0 100 14 100 32 C100 55 80 80 50 80 Z" fill="url(#${gradientId})"/>
-              
-              <!-- Reflet brillant 3D réaliste -->
               <ellipse cx="28" cy="20" rx="9" ry="14" fill="#ffffff" opacity="0.45" transform="rotate(-30 28 20)"/>
               <circle cx="22" cy="32" r="3" fill="#ffffff" opacity="0.3"/>
             </svg>
