@@ -2,14 +2,18 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <!-- Indispensable pour l'adaptation parfaite sur mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Joyeux Anniversaire ! 🎂</title>
-
-  <!-- Bibliothèque pour l'effet confettis -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <title>Joyeux Anniversaire Chou ❤️</title>
 
   <style>
+    :root {
+      --emerald-dark: #062c22;
+      --emerald-main: #0b4f3f;
+      --emerald-light: #157a62;
+      --gold-accent: #d4af37;
+      --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,215 +23,517 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      font-family: 'Playfair Display', Georgia, serif;
+      background: radial-gradient(circle at center, var(--emerald-main) 0%, var(--emerald-dark) 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      overflow-x: hidden;
+      overflow-y: auto;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .sparkles-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(rgba(212, 175, 55, 0.2) 1px, transparent 0);
+      background-size: 24px 24px;
+      animation: sparkle 4s infinite linear;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    #balloon-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -60px;
+      opacity: 0.9;
+      animation: floatUp 4s ease-in forwards;
+      filter: drop-shadow(0 5px 8px rgba(0,0,0,0.2));
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-115vh) scale(1.2) rotate(15deg); opacity: 0; }
     }
 
     .container {
       width: 100%;
       max-width: 380px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
+      z-index: 1;
+      margin: auto;
     }
 
-    /* --- ÉTAPE 1 : ENVELOPPE --- */
+    /* ENVELOPPE */
     .envelope-wrapper {
       width: 100%;
-      height: 220px;
-      position: relative;
-      background: #ff6b81;
-      border-radius: 12px;
-      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+      height: 250px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.4s ease;
+    }
+
+    .envelope-wrapper:active { transform: scale(0.97); }
+
+    .wax-seal {
+      width: 70px;
+      height: 70px;
+      background: var(--gold-gradient);
+      border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: transform 0.3s ease;
+      font-size: 28px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      margin-bottom: 15px;
+      animation: pulse 2s infinite;
     }
 
-    .envelope-wrapper:active {
-      transform: scale(0.98);
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
     }
 
     .envelope-text {
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: center;
-      padding: 10px;
+      color: #ffffff;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 300;
     }
 
-    /* --- ÉTAPE 2 : CARTE (Cachée au début) --- */
+    /* CARTE */
     .card {
       display: none;
-      background: white;
+      background: #ffffff;
+      color: var(--emerald-dark);
       width: 100%;
       border-radius: 24px;
       padding: 30px 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
       text-align: center;
-      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      border: 2px solid var(--gold-accent);
+      animation: fadeInLux 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
+    @keyframes fadeInLux {
+      0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .title {
-      color: #ff4757;
-      font-size: 1.8rem;
-      margin-bottom: 12px;
+    .title { font-size: 1.6rem; color: var(--emerald-dark); margin-bottom: 10px; font-weight: 700; }
+    .heart-icon { color: #e74c3c; display: inline-block; animation: beat 1.2s infinite; }
+
+    @keyframes beat {
+      0%, 50%, 100% { transform: scale(1); }
+      25%, 75% { transform: scale(1.2); }
     }
 
-    .message {
-      color: #4b6584;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
+    .message { color: #333; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; font-family: sans-serif; }
 
-    /* --- GÂTEAU & BOUGIE --- */
-    .cake-container {
-      margin: 20px 0;
+    /* SECTION PHOTOS (SWIPE) */
+    .photo-slider {
       position: relative;
-      display: inline-block;
-      cursor: pointer;
+      width: 100%;
+      height: 220px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+      border: 1px solid var(--gold-accent);
     }
 
-    .cake {
-      font-size: 80px;
-      line-height: 1;
+    .slider-track {
+      display: flex;
+      width: 200%;
+      height: 100%;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .slide {
+      width: 50%;
+      height: 100%;
       position: relative;
+      background: #f0f0f0;
     }
 
-    .flame {
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-badge {
       position: absolute;
-      top: -10px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 28px;
-      animation: flicker 0.6s infinite alternate;
-      transition: opacity 0.3s, transform 0.3s;
+      background: rgba(6, 44, 34, 0.8);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-family: sans-serif;
+      border: 1px solid var(--gold-accent);
     }
 
-    .flame.off {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-10px) scale(0);
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--emerald-dark);
+      z-index: 2;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
+    .slider-btn.prev { left: 8px; }
+    .slider-btn.next { right: 8px; }
+
+    /* GÂTEAU */
+    .cake-container { margin: 15px 0; position: relative; display: inline-block; cursor: pointer; }
+    .cake { font-size: 65px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); }
+    
+    .flame {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      animation: flicker 0.5s infinite alternate;
+      transition: all 0.4s ease;
+    }
+
+    .flame.off { opacity: 0; transform: translateX(-50%) translateY(-15px) scale(0); }
 
     @keyframes flicker {
       0% { transform: translateX(-50%) scale(1); }
-      100% { transform: translateX(-50%) scale(1.15) rotate(2deg); }
+      100% { transform: translateX(-50%) scale(1.2) rotate(3deg); }
     }
 
-    .instruction {
-      font-size: 0.9rem;
-      color: #8854d0;
-      font-weight: 600;
-      margin-top: 5px;
-    }
+    .instruction { font-size: 0.8rem; color: var(--emerald-light); font-weight: 600; font-family: sans-serif; text-transform: uppercase; }
 
-    /* --- BOUTON REPLAY --- */
+    /* BOUTONS */
     .btn-action {
-      background: linear-gradient(45deg, #ff4757, #ff6b81);
-      color: white;
-      border: none;
-      padding: 16px 28px;
-      font-size: 1.1rem;
+      background: var(--emerald-main);
+      color: #ffffff;
+      border: 1px solid var(--gold-accent);
+      padding: 14px 20px;
+      font-size: 0.95rem;
       font-weight: bold;
       border-radius: 50px;
-      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 10px;
       width: 100%;
-      max-width: 260px;
-      transition: transform 0.1s;
+      transition: all 0.2s ease;
     }
 
-    .btn-action:active {
-      transform: scale(0.95);
+    .btn-secondary {
+      background: transparent;
+      color: var(--emerald-main);
+      border: 1px dashed var(--emerald-main);
+      padding: 12px 15px;
+      font-size: 0.9rem;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+
+    /* CARTE À GRATTER */
+    .scratch-container {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px dashed #ccc;
+    }
+
+    .scratch-title {
+      font-size: 0.9rem;
+      color: var(--emerald-dark);
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-family: sans-serif;
+    }
+
+    .scratch-card-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .scratch-secret {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #fdfaf0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      color: var(--emerald-dark);
+      font-weight: bold;
+      font-size: 0.9rem;
+      font-family: sans-serif;
+      text-align: center;
+      line-height: 1.4;
+      border: 1px solid var(--gold-accent);
+      border-radius: 12px;
+    }
+
+    canvas#scratch-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      cursor: pointer;
+      touch-action: none;
+      border-radius: 12px;
+    }
+
+    /* POPUP CADEAU */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid var(--gold-accent);
+      max-width: 320px;
+      color: #333;
+      font-family: sans-serif;
     }
   </style>
 </head>
 <body>
 
+  <div class="sparkles-bg"></div>
+  <div id="balloon-container"></div>
+
   <div class="container">
     
-    <!-- 1. L'enveloppe à toucher -->
+    <!-- ENVELOPPE -->
     <div class="envelope-wrapper" id="envelope" onclick="openCard()">
-      <div class="envelope-text">
-        💌 Tu as reçu une carte !<br>
-        <small style="font-size: 0.8rem; font-weight: normal; opacity: 0.9;">(Touche pour ouvrir)</small>
-      </div>
+      <div class="wax-seal">✉️</div>
+      <div class="envelope-text">Pour Chou</div>
+      <small style="color: var(--gold-accent); font-size: 0.75rem; margin-top: 8px; font-family: sans-serif;">(Touche pour ouvrir)</small>
     </div>
 
-    <!-- 2. La carte d'anniversaire -->
+    <!-- CARTE D'ANNIVERSAIRE -->
     <div class="card" id="card">
-      <h1 class="title">Joyeux Anniversaire ! 🎉</h1>
+      <h1 class="title">Joyeux anniversaire chou <span class="heart-icon">❤️</span></h1>
       
+      <!-- SLIDER PHOTO AVANT / APRÈS -->
+      <div class="photo-slider">
+        <button class="slider-btn prev" onclick="moveSlide(-1)">❮</button>
+        <button class="slider-btn next" onclick="moveSlide(1)">❯</button>
+        <div class="slider-track" id="slider-track">
+          <!-- Remplace src par le lien/chemin de la photo petit -->
+          <div class="slide">
+            <img src="https://via.placeholder.com/400x300/0b4f3f/ffffff?text=Photo+Quand+il+etait+petit" alt="Quand il était petit">
+            <div class="slide-badge">Avant (Petit) 👶</div>
+          </div>
+          <!-- Remplace src par le lien/chemin de la photo grand -->
+          <div class="slide">
+            <img src="https://via.placeholder.com/400x300/d4af37/ffffff?text=Photo+Quand+il+est+grand" alt="Quand il est grand">
+            <div class="slide-badge">Après (Grand) 😎</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MESSAGE PERSONNALISÉ -->
       <p class="message">
-        Que cette journée soit remplie de joie, de rires, de bonheur et de belles surprises ! 💖
+        Tu as tellement grandi mais tu gardes toujours ce même sourire extraordinaire. Merci d'être la personne formidable que tu es chaque jour ! ✨
       </p>
 
-      <!-- Gâteau interactif -->
+      <!-- GÂTEAU -->
       <div class="cake-container" onclick="blowOutCandle()">
         <div class="flame" id="flame">🔥</div>
         <div class="cake">🎂</div>
-        <div class="instruction" id="cake-hint">Touche le gâteau pour souffler la bougie !</div>
+        <div class="instruction" id="cake-hint">Touche pour faire un vœu ✨</div>
       </div>
 
-      <button class="btn-action" onclick="triggerConfetti()">Fêter ça ! ✨</button>
+      <button class="btn-action" onclick="spawnHeartBalloons()">Envoyer des cœurs 🩷</button>
+      <button class="btn-secondary" onclick="openGift()">🎁 Ouvrir ton cadeau secret</button>
+
+      <!-- CARTE À GRATTER -->
+      <div class="scratch-container">
+        <div class="scratch-title">✨ Gratte ici pour découvrir un mot doux :</div>
+        <div class="scratch-card-wrapper">
+          <div class="scratch-secret">
+            Tu es la plus belle chose qui me soit arrivée. Je t'aime fort ! ❤️
+          </div>
+          <canvas id="scratch-canvas"></canvas>
+        </div>
+      </div>
     </div>
 
   </div>
 
+  <!-- POPUP CADEAU -->
+  <div class="modal" id="gift-modal">
+    <div class="modal-content">
+      <h2 style="color: var(--emerald-main); margin-bottom: 12px; font-size: 1.3rem;">🎟️ Ton Cadeau</h2>
+      <p style="margin-bottom: 20px; font-size: 1.1rem; font-weight: bold; color: #444;">
+        Bon pour un gros câlin et pleins de bisous 🫂💋
+      </p>
+      <button class="btn-action" onclick="closeGift()">Profiter du cadeau ❤️</button>
+    </div>
+  </div>
+
   <script>
     let candleBlown = false;
+    let currentSlide = 0;
 
-    // Fonction pour ouvrir l'enveloppe
     function openCard() {
       document.getElementById('envelope').style.display = 'none';
-      const card = document.getElementById('card');
-      card.style.display = 'block';
-      
-      // Lancer de confettis à l'ouverture
-      triggerConfetti();
+      document.getElementById('card').style.display = 'block';
+      spawnHeartBalloons();
+      initScratchCard();
     }
 
-    // Fonction pour éteindre la bougie
+    /* SLIDER PHOTO */
+    function moveSlide(direction) {
+      currentSlide = (currentSlide + direction + 2) % 2;
+      document.getElementById('slider-track').style.transform = `translateX(-${currentSlide * 50}%)`;
+    }
+
+    /* GÂTEAU */
     function blowOutCandle() {
       if (!candleBlown) {
         document.getElementById('flame').classList.add('off');
-        document.getElementById('cake-hint').innerText = "La bougie est éteinte ! 🥳";
-        document.getElementById('cake-hint').style.color = "#2ed573";
+        document.getElementById('cake-hint').innerText = "Vœu envoyé ! 💫";
+        document.getElementById('cake-hint').style.color = "#0b4f3f";
         candleBlown = true;
-        
-        // Explosion de confettis
-        triggerConfetti();
+        spawnHeartBalloons();
       }
     }
 
-    // Fonction d'animation des confettis
-    function triggerConfetti() {
-      // Confettis depuis la gauche et la droite pour mobile
-      confetti({
-        particleCount: 60,
-        spread: 60,
-        origin: { x: 0.2, y: 0.6 }
-      });
-      confetti({
-        particleCount: 60,
-        spread: 60,
-        origin: { x: 0.8, y: 0.6 }
-      });
+    /* POPUP CADEAU */
+    function openGift() {
+      document.getElementById('gift-modal').style.display = 'flex';
+      spawnHeartBalloons();
+    }
+
+    function closeGift() {
+      document.getElementById('gift-modal').style.display = 'none';
+    }
+
+    /* BALLONS */
+    function spawnHeartBalloons() {
+      const container = document.getElementById('balloon-container');
+      const heartEmojis = ['🩷', '💖', '💗', '💕', '💓'];
+
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const balloon = document.createElement('div');
+          balloon.className = 'balloon';
+          balloon.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+          balloon.style.left = (Math.random() * 90 + 5) + 'vw';
+          balloon.style.fontSize = (Math.random() * 20 + 35) + 'px';
+          
+          const duration = Math.random() * 2 + 3;
+          balloon.style.animationDuration = duration + 's';
+
+          balloon.onclick = function() {
+            this.style.transform = 'scale(1.8)';
+            this.style.opacity = '0';
+            this.style.transition = 'all 0.2s';
+          };
+
+          container.appendChild(balloon);
+
+          setTimeout(() => { balloon.remove(); }, duration * 1000);
+        }, i * 120);
+      }
+    }
+
+    /* LOGIQUE DE LA CARTE À GRATTER */
+    function initScratchCard() {
+      const canvas = document.getElementById('scratch-canvas');
+      const ctx = canvas.getContext('2d');
+      const wrapper = canvas.parentElement;
+
+      canvas.width = wrapper.offsetWidth;
+      canvas.height = wrapper.offsetHeight;
+
+      // Revêtement gris/doré à gratter
+      ctx.fillStyle = '#c0c0c0';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#a67c1e';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('✨ Grattez ici ✨', canvas.width / 2, canvas.height / 2 + 5);
+
+      let isDrawing = false;
+
+      function scratch(e) {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+        const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 18, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
+      canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+      window.addEventListener('mouseup', () => isDrawing = false);
+      window.addEventListener('touchend', () => isDrawing = false);
+      canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('touchmove', scratch);
     }
   </script>
 
