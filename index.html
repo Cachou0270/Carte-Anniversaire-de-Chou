@@ -250,7 +250,6 @@
       top: 15px;
       box-shadow: 0 0 12px #ffeb3b, 0 0 20px #ff9800;
       animation: flicker 0.6s infinite alternate ease-in-out;
-      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .candle-flame.flame-left { left: 68px; }
@@ -261,13 +260,27 @@
       100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
     }
 
+    /* Animation pour faire s'envoler et disparaître la flamme dès le clic */
     .candle-flame.off {
-      opacity: 0;
-      transform: translateY(-12px) scale(0);
-      box-shadow: none;
+      animation: flameBlowOut 0.7s forwards ease-out !important;
     }
 
-    /* Effet de fumée quand la bougie s'éteint */
+    @keyframes flameBlowOut {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: translateY(-15px) scale(0.8);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.2);
+        box-shadow: none;
+      }
+    }
+
     .smoke-particle {
       position: absolute;
       width: 8px;
@@ -430,6 +443,7 @@
       cursor: pointer;
       touch-action: none;
       border-radius: 16px;
+      transition: opacity 0.5s ease;
     }
 
     .final-envelope-box {
@@ -725,7 +739,6 @@
 
         </div>
 
-        <!-- BOUTON VERROUILLÉ D'ABORD -->
         <button class="btn-action" id="btn-to-step6" onclick="goToStep(6)" style="opacity: 0.5; pointer-events: none;">
           Ouvre ta lettre d'abord...
         </button>
@@ -750,6 +763,7 @@
     let giftOpened = false;
     let letterOpened = false;
     let currentSlide = 0;
+    let scratchInitialized = false;
 
     window.addEventListener('load', () => {
       launchSideConfetti();
@@ -783,7 +797,7 @@
       const activePage = document.getElementById(`step-${stepNumber}`);
       if (activePage) activePage.classList.add('active');
 
-      if (stepNumber === 4) {
+      if (stepNumber === 4 && !scratchInitialized) {
         setTimeout(initScratchCard, 100);
       }
 
@@ -802,11 +816,11 @@
         const flameLeft = document.getElementById('flame-left');
         const flameRight = document.getElementById('flame-right');
 
-        // Ajoute la classe pour éteindre les flammes
+        // Déclenche immédiatement l'animation de départ des flammes
         flameLeft.classList.add('off');
         flameRight.classList.add('off');
 
-        // Ajoute l'effet de fumée
+        // Effet de fumée
         createSmoke(flameLeft);
         createSmoke(flameRight);
 
@@ -863,7 +877,6 @@
       }
     }
 
-    // OUVRIR LA LETTRE ET DÉVERROUILLER LE BOUTON FINAL
     function openFinalLetter() {
       if (!letterOpened) {
         letterOpened = true;
@@ -949,32 +962,75 @@
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = '600 13px Montserrat, sans-serif';
+      ctx.font = '600 14px Montserrat, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('✨ GRATTEZ ICI ✨', canvas.width / 2, canvas.height / 2 + 4);
+      ctx.textBaseline = 'middle';
+      ctx.fillText('✨ GRATTEZ ICI ✨', canvas.width / 2, canvas.height / 2);
 
       let isDrawing = false;
+      scratchInitialized = true;
+
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        let clientX = e.clientX;
+        let clientY = e.clientY;
+
+        if (e.touches && e.touches.length > 0) {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        }
+
+        return {
+          x: clientX - rect.left,
+          y: clientY - rect.top
+        };
+      }
 
       function scratch(e) {
         if (!isDrawing) return;
-        const rect = canvas.getBoundingClientRect();
-        const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-        const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
-
+        e.preventDefault();
+        
+        const pos = getPos(e);
         ctx.globalCompositeOperation = 'destination-out';
         ctx.beginPath();
-        ctx.arc(x, y, 22, 0, Math.PI * 2);
+        ctx.arc(pos.x, pos.y, 20, 0, Math.PI * 2);
         ctx.fill();
+
+        checkScratchPercentage();
+      }
+
+      function checkScratchPercentage() {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = imageData.data;
+        let transparentPixels = 0;
+
+        for (let i = 3; i < pixels.length; i += 4) {
+          if (pixels[i] === 0) {
+            transparentPixels++;
+          }
+        }
+
+        const percentage = (transparentPixels / (pixels.length / 4)) * 100;
+        
+        if (percentage > 40) {
+          canvas.style.opacity = '0';
+          setTimeout(() => {
+            canvas.style.display = 'none';
+          }, 500);
+          if (typeof confetti === 'function') {
+            confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
+          }
+        }
       }
 
       canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
-      canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
-      window.addEventListener('mouseup', () => isDrawing = false);
-      window.addEventListener('touchend', () => isDrawing = false);
       canvas.addEventListener('mousemove', scratch);
-      canvas.addEventListener('touchmove', scratch);
+      window.addEventListener('mouseup', () => { isDrawing = false; });
+
+      canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, { passive: false });
+      canvas.addEventListener('touchmove', scratch, { passive: false });
+      window.addEventListener('touchend', () => { isDrawing = false; });
     }
   </script>
-
 </body>
 </html>
