@@ -76,14 +76,15 @@
       margin: auto;
     }
 
+    /* MODIFICATION : Fond de carte avec un dégradé de vert luxueux */
     .card {
-      background: rgba(255, 255, 255, 0.96);
+      background: linear-gradient(145deg, #093c30 0%, #05251e 100%);
       backdrop-filter: blur(12px);
-      color: var(--emerald-dark);
+      color: #ffffff;
       width: 100%;
       border-radius: 28px;
       padding: 35px 22px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(212, 175, 55, 0.4);
       text-align: center;
       border: 1.5px solid rgba(212, 175, 55, 0.6);
       animation: fadeInLux 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -100,11 +101,11 @@
     .envelope-wrapper {
       width: 100%;
       height: 260px;
-      background: rgba(255, 255, 255, 0.95);
+      background: linear-gradient(145deg, #0b4f3f 0%, #04251d 100%);
       border: 1.5px solid var(--gold-accent);
       backdrop-filter: blur(10px);
       border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -150,7 +151,7 @@
     }
 
     .envelope-text {
-      color: var(--emerald-main);
+      color: #ffffff;
       font-size: 1.4rem;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -159,7 +160,7 @@
 
     .title {
       font-size: 1.8rem;
-      color: var(--emerald-main);
+      color: #fcf6ba;
       margin-bottom: 12px;
       font-weight: 700;
       letter-spacing: 0.5px;
@@ -170,7 +171,7 @@
     }
 
     .message {
-      color: #4a5568;
+      color: #e2e8f0;
       font-size: 1.15rem;
       line-height: 1.6;
       margin-bottom: 22px;
@@ -185,7 +186,7 @@
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 18px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
       border: 1px solid var(--gold-accent);
     }
 
@@ -211,7 +212,7 @@
       position: absolute;
       bottom: 12px; left: 50%;
       transform: translateX(-50%);
-      background: rgba(11, 79, 63, 0.9);
+      background: rgba(4, 37, 29, 0.9);
       color: #fff;
       padding: 5px 16px;
       border-radius: 20px;
@@ -228,7 +229,7 @@
       border: 1px solid var(--gold-accent); width: 36px; height: 36px;
       border-radius: 50%; cursor: pointer;
       font-weight: bold; color: var(--emerald-dark);
-      z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     .slider-btn.prev { left: 10px; }
     .slider-btn.next { right: 10px; }
@@ -241,6 +242,7 @@
       width: 180px;
     }
 
+    /* Style des flammes */
     .candle-flame {
       position: absolute;
       width: 12px;
@@ -250,6 +252,7 @@
       top: 15px;
       box-shadow: 0 0 12px #ffeb3b, 0 0 20px #ff9800;
       animation: flicker 0.6s infinite alternate ease-in-out;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .candle-flame.flame-left { left: 68px; }
@@ -260,45 +263,33 @@
       100% { transform: scale(1.15) rotate(3deg); opacity: 1; }
     }
 
-    /* Animation pour faire s'envoler et disparaître la flamme dès le clic */
+    /* Animation d'extinction des flammes */
     .candle-flame.off {
-      animation: flameBlowOut 0.7s forwards ease-out !important;
-    }
-
-    @keyframes flameBlowOut {
-      0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        opacity: 0.6;
-        transform: translateY(-15px) scale(0.8);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.2);
-        box-shadow: none;
-      }
+      animation: none !important;
+      opacity: 0 !important;
+      transform: translateY(-20px) scale(0.1) !important;
+      box-shadow: none !important;
     }
 
     .smoke-particle {
       position: absolute;
       width: 8px;
       height: 8px;
-      background: rgba(200, 200, 200, 0.8);
+      background: rgba(220, 220, 220, 0.8);
       border-radius: 50%;
       pointer-events: none;
       animation: riseAndFade 1.2s forwards ease-out;
+      z-index: 10;
     }
 
     @keyframes riseAndFade {
-      0% { opacity: 0.8; transform: translateY(0) scale(1); }
-      100% { opacity: 0; transform: translateY(-35px) scale(3); }
+      0% { opacity: 0.9; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-40px) scale(3.5); }
     }
 
     .instruction {
       font-size: 0.85rem;
-      color: var(--emerald-light);
+      color: var(--gold-accent);
       font-weight: 600;
       font-family: 'Montserrat', sans-serif;
       text-transform: uppercase;
@@ -325,7 +316,7 @@
       border: 1.5px solid var(--gold-accent);
       z-index: 3;
       transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .gift-lid::before {
@@ -362,7 +353,7 @@
       border-radius: 0 0 6px 6px;
       border: 1.5px solid var(--gold-accent);
       z-index: 1;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
 
     .gift-body::before {
@@ -385,7 +376,7 @@
       border-radius: 20px;
       padding: 25px 18px;
       margin: 20px 0;
-      box-shadow: 0 8px 20px rgba(11, 79, 63, 0.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       display: none;
       flex-direction: column;
       align-items: center;
@@ -417,7 +408,7 @@
       width: 100%; height: 125px;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
       margin: 20px 0;
     }
 
@@ -457,13 +448,13 @@
     }
 
     .closed-letter-btn {
-      background: #ffffff;
+      background: linear-gradient(135deg, #0b4f3f 0%, #04251d 100%);
       border: 1.5px solid var(--gold-accent);
       border-radius: 20px;
       padding: 25px 20px;
       width: 100%;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(11, 79, 63, 0.08);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
@@ -479,7 +470,7 @@
       border-radius: 16px;
       padding: 25px 20px;
       width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       text-align: left;
       font-family: 'Caveat', cursive;
       font-size: 1.45rem;
@@ -500,30 +491,33 @@
       color: var(--emerald-main);
     }
 
-    .final-photo-container {
+    .final-video-container {
       width: 100%;
-      height: 280px;
       border-radius: 20px;
       overflow: hidden;
       margin: 20px 0 0 0;
       border: 2px solid var(--gold-accent);
-      box-shadow: 0 12px 30px rgba(11, 79, 63, 0.15);
-      position: relative;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      background: #000;
+      line-height: 0;
     }
 
-    .final-photo-container img {
+    .final-video-container video {
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-height: 380px;
+      border-radius: 18px;
+      display: block;
       object-fit: cover;
     }
 
     .btn-action {
-      background: var(--emerald-main);
-      color: #ffffff;
+      background: var(--gold-gradient);
+      color: var(--emerald-dark);
       border: 1px solid var(--gold-accent);
       padding: 16px 24px;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       font-family: 'Montserrat', sans-serif;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -539,7 +533,7 @@
       gap: 10px;
     }
 
-    .btn-action:active { transform: scale(0.97); background: var(--emerald-dark); }
+    .btn-action:active { transform: scale(0.97); }
   </style>
 </head>
 <body>
@@ -558,10 +552,10 @@
         </div>
       </div>
       <div class="envelope-text">Pour toi</div>
-      <small style="color: var(--emerald-light); font-size: 0.8rem; margin-top: 10px; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">(Touche pour ouvrir)</small>
+      <small style="color: var(--gold-accent); font-size: 0.8rem; margin-top: 10px; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">(Touche pour ouvrir)</small>
     </div>
 
-    <!-- CARTE PRINCIPALE -->
+    <!-- CARTE PRINCIPALE EN DÉGRADÉ DE VERT -->
     <div class="card" id="main-card" style="display: none;">
       
       <!-- ÉTAPE 1 : PHOTOS & MESSAGE -->
@@ -721,7 +715,7 @@
                 </svg>
               </div>
             </div>
-            <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--emerald-main);">
+            <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: #ffffff;">
               Ouvrir ta lettre
             </span>
           </div>
@@ -739,18 +733,22 @@
 
         </div>
 
+        <!-- MODIFICATION DU TEXTE DU BOUTON : Orthographe corrigée ("préférée") -->
         <button class="btn-action" id="btn-to-step6" onclick="goToStep(6)" style="opacity: 0.5; pointer-events: none;">
           Ouvre ta lettre d'abord...
         </button>
       </div>
 
-      <!-- ÉTAPE 6 : PAGE PHOTO FINALE ET BALLONS -->
+      <!-- ÉTAPE 6 : PAGE VIDÉO FINALE ET BALLONS -->
       <div class="step-page" id="step-6">
         <h1 class="title">Pour Toujours ❤️</h1>
         <p class="message">Je t'aime de tout mon cœur !</p>
 
-        <div class="final-photo-container">
-          <img src="https://via.placeholder.com/400x400/0b4f3f/ffffff?text=Votre+Plus+Belle+Photo+Ensemble" alt="Photo Souvenir">
+        <div class="final-video-container">
+          <video controls playsinline preload="metadata">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas le lecteur vidéo.
+          </video>
         </div>
       </div>
 
@@ -811,21 +809,25 @@
       document.getElementById('slider-track').style.transform = `translateX(-${currentSlide * 50}%)`;
     }
 
+    /* MODIFICATION : Correction du fonctionnement pour éteindre les flammes */
     function blowOutCandle() {
       if (!candleBlown) {
         const flameLeft = document.getElementById('flame-left');
         const flameRight = document.getElementById('flame-right');
 
-        // Déclenche immédiatement l'animation de départ des flammes
+        // Éteint les flammes de manière garantie via classe et styles directs
         flameLeft.classList.add('off');
         flameRight.classList.add('off');
+        
+        flameLeft.style.display = 'none';
+        flameRight.style.display = 'none';
 
-        // Effet de fumée
-        createSmoke(flameLeft);
-        createSmoke(flameRight);
+        // Génération de la fumée aux positions des bougies
+        createSmoke(68, 15);
+        createSmoke(100, 15);
 
         document.getElementById('cake-hint').innerText = "Vœu des 26 ans envoyé ! 💫";
-        document.getElementById('cake-hint').style.color = "#0b4f3f";
+        document.getElementById('cake-hint').style.color = "#fcf6ba";
         candleBlown = true;
         
         const nextBtn = document.getElementById('btn-to-step3');
@@ -835,14 +837,14 @@
       }
     }
 
-    function createSmoke(flameElement) {
-      const container = flameElement.parentElement;
-      for (let i = 0; i < 3; i++) {
+    function createSmoke(leftPos, topPos) {
+      const container = document.querySelector('.cake-container-choco');
+      for (let i = 0; i < 4; i++) {
         setTimeout(() => {
           const smoke = document.createElement('div');
           smoke.className = 'smoke-particle';
-          smoke.style.left = (flameElement.offsetLeft + 2 + Math.random() * 4) + 'px';
-          smoke.style.top = (flameElement.offsetTop + 5) + 'px';
+          smoke.style.left = (leftPos + (Math.random() * 8 - 4)) + 'px';
+          smoke.style.top = topPos + 'px';
           container.appendChild(smoke);
 
           setTimeout(() => smoke.remove(), 1200);
@@ -877,6 +879,7 @@
       }
     }
 
+    /* MODIFICATION : Correction orthographique sur le bouton ("préférée") */
     function openFinalLetter() {
       if (!letterOpened) {
         letterOpened = true;
@@ -884,7 +887,7 @@
         document.getElementById('final-letter-paper').style.display = 'block';
         
         const nextBtn = document.getElementById('btn-to-step6');
-        nextBtn.innerText = "Bisouuuss de ta boloss preferer 💋✨";
+        nextBtn.innerText = "Bisouuuuuss de ta boloss préférée 💋✨";
         nextBtn.style.opacity = "1";
         nextBtn.style.pointerEvents = "auto";
       }
